@@ -47,3 +47,38 @@ const validAnagram = (str1, str2) => {
 }
 
 // console.log(validAnagram('pizza', 'poppa'));
+
+/*
+========================
+Multiple Pointers
+========================
+
+Count unique values challenge:
+"write a function called countUniqueValues(), which accepts a sorted array, and counts the unique values in the array. There can be negative numbers in the array, but it will always be sorted."
+
+Expect:
+countUniqueValues([-3,-3,1,2,2]); // 3
+countUniqueValues([-3,1,2]); // 3
+countUniqueValues([]); // 0
+*/
+
+function countUniqueValues(array) {
+    if(array.length === 0) return 0;
+    let count = 1;
+    let pointer1 = 0;
+    let pointer2 = 1
+
+    while(pointer2 <= array.length -1) {
+        if (array[pointer2] === array[pointer1]) {
+            pointer2 ++;
+        } else if (array[pointer2] > array[pointer1]) {
+            pointer1 = pointer2
+            pointer2 ++;
+            count ++
+        }
+    }
+
+    return count;
+}
+
+// console.log(countUniqueValues([-3,-3,1,2,2,2,2,2,2,4,10,16,16]))
