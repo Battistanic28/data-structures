@@ -35,3 +35,95 @@ function countDown(num) {
 // call function
 countDown(5)
 ```
+
+### More interesting
+```javascript
+function sumRange(num){
+   if(num === 1) return 1; 
+   return num + sumRange(num-1);
+}
+
+sumRange(4)
+```
+`sumRange` is an interesting example of the call stack because the calculations can't resolve until num === 1
+
+### Writing factorial recursively
+
+This is a classic recursion example. Calculating the factorial could easily be accomplished with a `for` loop, howeverwe can also use recursion.
+
+Non recursive (for loop):
+```javascript
+function factorial(num){
+    let total = 1;
+    for(let i = num; i > 1; i--){
+        total *= i
+    }
+    return total;
+}
+```
+
+Recursive:
+```javascript
+function factorial(num) {
+    if (num === 1) return 1
+    return num * factori(num - 1)
+}
+```
+
+### Common Recursion Pitfalls
+- missing or incorrect base case, resulting in infinite loop
+- forgetting to `return` value for base case, resulting in infinite loop
+
+### Helper Method Recursion
+- an example of helper method recursion is a function that takes advantage of a recursive helper function.
+- this can be helpful for more complex recursive functions
+
+```javascript
+function collectOddValues(arr){
+    
+    let result = [];
+
+    function helper(helperInput){
+        if(helperInput.length === 0) {
+            return;
+        }
+        
+        if(helperInput[0] % 2 !== 0){
+            result.push(helperInput[0])
+        }
+        
+        helper(helperInput.slice(1))
+    }
+    
+    helper(arr)
+
+    return result;
+}
+
+collectOddValues([1,2,3,4,5,6,7,8,9])
+```
+
+### Pure recursion
+
+```javascript
+function collectOddValues(arr){
+    let newArr = [];
+    
+    if(arr.length === 0) {
+        return newArr;
+    }
+        
+    if(arr[0] % 2 !== 0){
+        newArr.push(arr[0]);
+    }
+        
+    newArr = newArr.concat(collectOddValues(arr.slice(1)));
+    return newArr;
+}
+
+collectOddValues([1,2,3,4,5])
+```                                 
+                                                                
+                                                                             
+                            
+            

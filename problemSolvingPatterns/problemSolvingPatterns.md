@@ -70,3 +70,44 @@ function sumZero(arr) {
     }
 }
 ```
+
+### The Sliding Window
+- a pattern that involves creating a window whcih can either be an array or number from position to another. Depending on a certain condition, the window either increases or closes (and a new window is created). This pattern is very useful for keeping track of a subset of data in an array/string etc. 
+
+Ex.
+
+"write a function called maxSubarraySum which accepts an array of integers and a number called n. The function should calculate the maximum sum of n consecutive elements in the array."
+- ```maxSubarraySum([1,2,3], 3); // 6```
+- ```maxSubarraySum([1,2,3], 1); // 3```
+- ```maxSubarraySum([2,6,9,2,1,8,5,6,3],3); // 19```
+
+
+Solution:
+```javascript
+function maxSubarraySum(arr, num){
+  let maxSum = 0;
+  let tempSum = 0;
+  if (arr.length < num) return null;
+  for (let i = 0; i < num; i++) {
+    maxSum += arr[i];
+  }
+  tempSum = maxSum;
+  for (let i = num; i < arr.length; i++) {
+    tempSum = tempSum - arr[i - num] + arr[i];
+    maxSum = Math.max(maxSum, tempSum);
+  }
+  return maxSum;
+}
+
+maxSubarraySum([2,6,9,2,1,8,5,6,3],3)
+```
+
+### Divide and Conquer
+- this pattern involves dividing a data set into smaller chunks and then repeatinga process with a subset of data. This pattern can tremendously decrease time complexity.
+
+Ex.
+
+"given a sorted array of integers, write a function called search, that accepts a value and returns the index where the value passed to the function is located. If the value is not found, return -1."
+- ```search([1,2,3,4,5,6], 4); // 3```
+- ```search([1,2,3,4,5,6], 6); // 5```
+- ```search([1,2,3,4,5,6], 11); // -1```
