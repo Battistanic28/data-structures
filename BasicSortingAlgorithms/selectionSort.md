@@ -31,3 +31,8 @@ const selectionSort = (arr) => {
 
 selectionSort([5,3,9,2,10,1,7,4,6])
 ```
+
+### BigO
+
+- O(n^2)
+- not terribly efficient

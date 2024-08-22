@@ -1,4 +1,4 @@
-# Sorting Algorithms
+# Basic Sorting Algorithms
 
 ## Objectives
 - Implement Bubble Sort
@@ -20,7 +20,8 @@
 - All values are converted to unicode, then sorted. This does not work for numbers!
 - .sort() accepts a function as a param that allows us to define the sort method.
 
-### Bubble Sort
+---
+# Bubble Sort
 - A sorting algorithm where the largest values "buble" to the top.
 - Bubble sort is not very effiectient and not commonly implemented.
 - Works by looping through the data set and comparing each value to the value that follows it. If the first value is larger, we swap their positions and continue.
@@ -103,3 +104,80 @@ Adding the 'noSwaps' variable is a small change that can dramatically improve th
 ### BigO
 
 In general, it's O(n^2). This is because we have a nested loop and we are roughly making a comparison for each item in the array. However, if the data is nearly sorted, the complexity is more like linear time. 
+
+---
+# Selection Sort
+
+Similar to Bubble Sort, but instead of first placing large values into a sorted position, it places small values into sorted position.
+
+### Pseudocode
+- store the first element as the smallest value we've encountered.
+- compare this item to the next item in the aray until you find a smaller number
+- if a smaller number is found, designate the new minimum and continue until the end of array
+- if the minimum is not the value (index) you initially began with, swap the two values
+- repeat this with the next element until the array is sorted
+
+```javascript
+const selectionSort = (arr) => {
+    for (let i = 0; i < arr.length; i++) {
+        let smallest = i;
+        for (let j = i+1; j < arr.length; j++) {
+            if (arr[j] < arr[smallest]) {
+                smallest = j;
+            }
+        }
+        // SWAP
+        if (i !== smallest) { // <-- optimize
+            var temp = arr[i];
+            arr[i] = arr[smallest]
+            arr[smallest] = temp
+        }
+    }
+
+    return arr;
+}
+
+selectionSort([5,3,9,2,10,1,7,4,6])
+```
+
+### BigO
+
+- O(n^2)
+- not terribly efficient
+
+---
+# Insertion Sort
+
+- Similar to both selection sort and bubble sort.
+- builds up the sort by gradually creating a larger left portion of the array that is always sorted.
+
+### Pseudocode
+
+- start by picking the second element in the array
+- now compare the second element with the one before it and swap if necessary
+- continue to the next element and if it is in the incorrect order, iterate through the sorted portion (left side) to place the element in the correct place
+- repeat until array is sorted
+
+```javascript
+function insertionSort(arr) {
+    for (i=1; i<arr.length; i++) {
+        var currentVal = arr[i];
+        for (var j=i-1; j >= 0 && arr[j] > currentVal; j--) {
+            arr[j+1] = arr[j];
+        }
+        arr[j+1] = currentVal;
+        console.log(arr)
+    }
+
+    return arr;
+}
+
+insertionSort([2,1,9,76,4])
+```
+
+### BigO
+- O(n^2)
+- time complexity is similar to selection and bubble sort
+- however, there is some advantage in the case where the array is almost sorted
+- inverted sort (i.e. [4,3,2,1]) is the worst case scenario for insertion sort
+- insertion sort is a good option where data is coming in live or streaming
